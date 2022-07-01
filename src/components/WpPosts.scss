@@ -1,0 +1,13 @@
+.wp-posts {
+    &__postcards {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        border: 2px solid #3880ff;
+        border-radius: 4px;
+        padding: .5rem 0;
+        margin: 1rem auto;
+    }
+}

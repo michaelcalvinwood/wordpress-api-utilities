@@ -39,6 +39,16 @@ const WpAuthentication = () => {
             setDisplayName(displayName);
             setEmail(email);
             setNiceName(niceName);
+            
+            // const newPost = {
+            //     title: "Test Title",
+            //     content: "Test Content",
+            //     status: "publish"
+            // }
+
+            // wpUtils.wpCreatePost(testDomainUrl, newPost, token)
+            // .then(result => console.log(result))
+            // .catch(error => console.log(error));
         })
         .catch(error => {
             console.log(error, error.message);

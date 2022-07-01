@@ -4,10 +4,12 @@ import './App.css';
 import * as wpUtils from './utils/wordpress-api-utils';
 import AppContext from './data/AppContext';
 import WpAuthentication from './components/WpAuthentication';
+import WpPosts from './components/WpPosts';
 
 function App() {
   const [endpoints, setEndpoints] = useState(null);
   const [posts, setPosts] = useState(null);
+  const [selectedPost, setSelectedPost] = useState(0);
 
   const appCtx = useContext(AppContext);
   const { domainUrl } = appCtx;
@@ -33,6 +35,16 @@ function App() {
     <div className="App">
       { !domainUrl &&
         <WpAuthentication />
+      }
+      {
+        domainUrl && !selectedPost &&
+        <WpPosts 
+          setSelectedPost={setSelectedPost}/>
+      }
+      {
+        selectedPost ?
+        <p>Selected post: {selectedPost}</p> :
+        ''
       }
     </div>
   );
