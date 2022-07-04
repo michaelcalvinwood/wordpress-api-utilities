@@ -1,0 +1,71 @@
+.wp-edit-post {
+    &__buttons {
+        margin: 1rem 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    &__publish-button {
+        width: 4rem;
+        padding: .25rem;
+        background-color: #3880ff;
+        color: white;
+        border: 1px solid #3880ff;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: .5rem;
+        
+
+    }
+    &__cancel-button {
+        width: 4rem;
+        padding: .25rem;
+        background-color: transparent;
+        color: #3880ff;
+        border: 1px solid #3880ff;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: .5rem;
+
+        &:hover {
+            background-color: #3880ff;
+            color: white;
+        }
+
+    }
+    &__jodit {
+        background-color: #ffffff;
+    }
+    &__post-settings {
+        width: 80%;
+        margin: 0 auto 1rem auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+    &__post-settings-data, &__post-settings-media {     
+       display: block;
+       margin: 1rem auto;
+        
+    }
+    &__title, &__title-container {
+        text-align: center;
+        width: 30rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-size: 2rem;
+        font-weight: 600;
+        display: block;
+        margin: auto;
+    }
+    &__featured-image {
+        max-width: 500px;
+    }
+
+}
+
+.jodit-workplace {
+    background-color: #ffffff;
+}

@@ -5,12 +5,13 @@ import * as wpUtils from '../utils/wordpress-api-utils';
 import WpPostCard from "./WpPostCard";
 
 const WpPosts = props => {
-    const [posts, setPosts] = useState([]);
 
     const { setSelectedPost } = props;
 
     const appCtx = useContext(AppContext);
     const { domainUrl } = appCtx;
+
+    const { posts, setPosts } = props;
 
     const getPosts = async () => {
         let posts = [];

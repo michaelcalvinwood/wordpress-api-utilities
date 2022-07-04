@@ -5,10 +5,11 @@ import * as wpUtils from './utils/wordpress-api-utils';
 import AppContext from './data/AppContext';
 import WpAuthentication from './components/WpAuthentication';
 import WpPosts from './components/WpPosts';
+import WpEditPost from './components/WpEditPost';
 
 function App() {
   const [endpoints, setEndpoints] = useState(null);
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(0);
 
   const appCtx = useContext(AppContext);
@@ -39,12 +40,17 @@ function App() {
       {
         domainUrl && !selectedPost &&
         <WpPosts 
-          setSelectedPost={setSelectedPost}/>
+          setSelectedPost={setSelectedPost}
+          posts={posts}
+          setPosts={setPosts}/>
       }
       {
-        selectedPost ?
-        <p>Selected post: {selectedPost}</p> :
-        ''
+        selectedPost &&
+        <WpEditPost
+          posts={posts}
+          selectedPost={selectedPost}
+          setSelectedPost={setSelectedPost}
+          />
       }
     </div>
   );

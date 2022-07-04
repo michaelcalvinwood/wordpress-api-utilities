@@ -2,17 +2,27 @@
 
 import axios from 'axios';
 
+const wpAxios = request => {
+    return new Promise((resolve, reject) => {
+        axios(request)
+        .then(result => resolve(result.data))
+        .catch(error => reject(error));
+    })
+}
+
 export const wpGetEndpoints = domainUrl => {
     const request = {
         url: `${domainUrl}/wp-json`,
         method: 'get'
     }
 
-    return new Promise((resolve, reject) => {
-        axios(request)
-        .then(result => resolve(result.data))
-        .catch(error => reject(error));
-    })
+    return wpAxios(request);
+
+    // return new Promise((resolve, reject) => {
+    //     axios(request)
+    //     .then(result => resolve(result.data))
+    //     .catch(error => reject(error));
+    // })
 }
 
 export const wpGetPosts = domainUrl => {
@@ -21,11 +31,13 @@ export const wpGetPosts = domainUrl => {
         method: 'get'
     }
 
-    return new Promise((resolve, reject) => {
-        axios(request)
-        .then(result => resolve(result.data))
-        .catch(error => reject(error));
-    })
+    return wpAxios(request);
+
+    // return new Promise((resolve, reject) => {
+    //     axios(request)
+    //     .then(result => resolve(result.data))
+    //     .catch(error => reject(error));
+    // })
 }
 
 export const wpJwtAuthentication = (domainUrl, username, password) => {
@@ -41,13 +53,14 @@ export const wpJwtAuthentication = (domainUrl, username, password) => {
         }
     }
 
-    console.log(request)
+    console.log(request);
+    return wpAxios(request);
 
-    return new Promise((resolve, reject) => {
-        axios(request)
-        .then(result => resolve(result.data))
-        .catch(error => reject(error));
-    })
+    // return new Promise((resolve, reject) => {
+    //     axios(request)
+    //     .then(result => resolve(result.data))
+    //     .catch(error => reject(error));
+    // })
 }
 
 /* wpCreatePost: Example data
@@ -57,6 +70,15 @@ export const wpJwtAuthentication = (domainUrl, username, password) => {
         status: "publish"
     }
 */
+
+export const wpGetMediaInfoFromId = (domainUrl, mediaId) => {
+    const request = {
+        url: `${domainUrl}/wp-json/wp/v2/media/${mediaId}`,
+        method: 'get'
+    }
+
+    return wpAxios(request);
+}
 
 export const wpCreatePost = (domainUrl, data, token) => {
     const request = {
@@ -69,11 +91,12 @@ export const wpCreatePost = (domainUrl, data, token) => {
         data
     }
 
-    return new Promise((resolve, reject) => {
-        axios(request)
-        .then(result => resolve(result.data))
-        .catch(error => reject(error));
-    })
+    return wpAxios(request);
+    // return new Promise((resolve, reject) => {
+    //     axios(request)
+    //     .then(result => resolve(result.data))
+    //     .catch(error => reject(error));
+    // })
 }
 
 const getAuthorInfoFromAuthorUrl = async url => {
@@ -81,11 +104,12 @@ const getAuthorInfoFromAuthorUrl = async url => {
         url,
         method: 'get'
     }
-    return new Promise ((resolve, reject) => {
-        axios(request)
-        .then(result => resolve(result.data))
-        .catch(error => reject(error));
-    })
+    return wpAxios(request);
+    // return new Promise ((resolve, reject) => {
+    //     axios(request)
+    //     .then(result => resolve(result.data))
+    //     .catch(error => reject(error));
+    // })
 }
 
 export const getAuthorsFromAuthorArray = async authorArr => {
@@ -104,4 +128,18 @@ export const getAuthorsFromAuthorArray = async authorArr => {
     }
 
     return authors;
+}
+
+export const wpUpdatePost = async (domainUrl, selectedPost, data, token) => {
+    const request = {
+        url: `${domainUrl}/wp-json/wp/v2/posts/${selectedPost}`,
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        data
+    }
+
+    return wpAxios(request);
 }
