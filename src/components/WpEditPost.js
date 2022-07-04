@@ -3,10 +3,15 @@ import JoditEditor from "jodit-react";
 import React, {useState, useRef, useEffect, useContext, useMemo} from 'react';
 import * as wpUtils from '../utils/wordpress-api-utils';
 import AppContext from '../data/AppContext';
+import GrapesEditor from './GrapesEditor';
+
+// https://grapesjs.com/docs/getting-started.html#import-the-library
+// https://esketchers.com/integrating-grapesjs-react/
+// https://github.com/artf/grapesjs
 
 
 const WpEditPost = props => {
-    const editor = useRef(null);
+    const joditEditor = useRef(null);
 	const [content, setContent] = useState('');
     const [postTitle, setPostTitle] = useState('');
     const [featuredMediaUrl, setFeaturedMediaUrl] = useState('');
@@ -17,7 +22,7 @@ const WpEditPost = props => {
     const appCtx = useContext(AppContext);
     const { domainUrl, token } = appCtx;
 
-    const config = {
+    const joditConfig = {
 		readonly: false
 	}
 
@@ -28,7 +33,6 @@ const WpEditPost = props => {
     const postContent = () => {
         // give time for the blur event handler to update the content in state
         
-
         setTimeout(() => {
             const data = {
                 content,
@@ -108,14 +112,19 @@ const WpEditPost = props => {
                     }
                 </div>
             
-            <JoditEditor
+            {/* <JoditEditor
                 className="wp-edit-post__jodit"
-                ref={editor}
+                ref={joditEditor}
                 value={content}
-                config={config}
-                tabIndex={1} // tabIndex of textarea
+                config={joditConfig}
+                tabIndex={1}
                 onBlur={newContent => updateContent(newContent)}
-		/>
+		    /> */}
+            <GrapesEditor
+                className="wp-edit-post__grapes"
+                content={content}
+                updateConten={updateContent}
+            />
         </div> 
     )
 }

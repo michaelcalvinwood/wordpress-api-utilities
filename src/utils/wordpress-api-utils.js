@@ -17,12 +17,6 @@ export const wpGetEndpoints = domainUrl => {
     }
 
     return wpAxios(request);
-
-    // return new Promise((resolve, reject) => {
-    //     axios(request)
-    //     .then(result => resolve(result.data))
-    //     .catch(error => reject(error));
-    // })
 }
 
 export const wpGetPosts = domainUrl => {
@@ -32,12 +26,6 @@ export const wpGetPosts = domainUrl => {
     }
 
     return wpAxios(request);
-
-    // return new Promise((resolve, reject) => {
-    //     axios(request)
-    //     .then(result => resolve(result.data))
-    //     .catch(error => reject(error));
-    // })
 }
 
 export const wpJwtAuthentication = (domainUrl, username, password) => {
@@ -53,14 +41,7 @@ export const wpJwtAuthentication = (domainUrl, username, password) => {
         }
     }
 
-    console.log(request);
     return wpAxios(request);
-
-    // return new Promise((resolve, reject) => {
-    //     axios(request)
-    //     .then(result => resolve(result.data))
-    //     .catch(error => reject(error));
-    // })
 }
 
 /* wpCreatePost: Example data
@@ -92,11 +73,6 @@ export const wpCreatePost = (domainUrl, data, token) => {
     }
 
     return wpAxios(request);
-    // return new Promise((resolve, reject) => {
-    //     axios(request)
-    //     .then(result => resolve(result.data))
-    //     .catch(error => reject(error));
-    // })
 }
 
 const getAuthorInfoFromAuthorUrl = async url => {
@@ -104,12 +80,8 @@ const getAuthorInfoFromAuthorUrl = async url => {
         url,
         method: 'get'
     }
+
     return wpAxios(request);
-    // return new Promise ((resolve, reject) => {
-    //     axios(request)
-    //     .then(result => resolve(result.data))
-    //     .catch(error => reject(error));
-    // })
 }
 
 export const getAuthorsFromAuthorArray = async authorArr => {
@@ -120,11 +92,15 @@ export const getAuthorsFromAuthorArray = async authorArr => {
     let authors = '';
 
     for (let i = 0; i < authorArr.length; ++i) {
-        if (!authorArr[i].embeddable) continue;
-        const authorInfo = await getAuthorInfoFromAuthorUrl(authorArr[i].href);
-
-        if (authors.length) authors += ' ' + authorInfo.name;
-        else authors = authorInfo.name;
+        // if (!authorArr[i].embeddable) continue;
+        
+        try {
+            const authorInfo = await getAuthorInfoFromAuthorUrl(authorArr[i].href);
+            if (authors.length) authors += ' ' + authorInfo.name;
+            else authors = authorInfo.name;
+        } catch (e) {
+            console.error(e);   
+        }
     }
 
     return authors;
