@@ -49,6 +49,8 @@ const WpAuthentication = () => {
             // wpUtils.wpCreatePost(testDomainUrl, newPost, token)
             // .then(result => console.log(result))
             // .catch(error => console.log(error));
+
+            // REST API
         })
         .catch(error => {
             console.log(error, error.message);
